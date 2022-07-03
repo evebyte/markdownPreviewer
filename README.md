@@ -1,6 +1,6 @@
-# Calculator App
+# Markdown Previewer
 
-Markdown previewer.
+Write your markdown in the editor and see it rendered in the preview.
 
 Created with React and Tailwind CSS.
 
