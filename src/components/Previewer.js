@@ -13,26 +13,24 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Previewer = ({ markdown, onChange }) => {
-	// todo: consider making handleFullscreen a hook and useEffect to call it, like useDarkMode
 	// fullscreen toggle
 	const [isFullscreen, setIsFullscreen] = useState(false);
 
-	const handleFullscreen = () => {
-		setIsFullscreen(!isFullscreen);
-
+	useEffect(() => {
 		const editorWindow = document.getElementById("editorWindow");
 		const previewerWindow = document.getElementById("previewerWindow");
-		const editor = document.getElementById("editor");
 
 		if (isFullscreen) {
 			editorWindow.classList.add("hidden");
 			previewerWindow.classList.add("fullscreen");
-			editor.classList.add("no-resize");
 		} else {
 			editorWindow.classList.remove("hidden");
 			previewerWindow.classList.remove("fullscreen");
-			editor.classList.remove("no-resize");
 		}
+	}, [isFullscreen]);
+
+	const handleFullscreen = () => {
+		setIsFullscreen(!isFullscreen);
 	};
 
 	// handle markdown change
@@ -48,7 +46,7 @@ const Previewer = ({ markdown, onChange }) => {
 			{/* toolbar */}
 			<div
 				id="toolbar"
-				className="code font-bold
+				className="monospace font-bold
                     flex row  
                     bg-gradient-to-r from-sky-400 to-blue-500
                     dark:from-sky-700 dark:to-blue-800
@@ -99,11 +97,8 @@ const Previewer = ({ markdown, onChange }) => {
                     focus:bg-slate-300 focus:dark:bg-slate-700
                     "
 			>
-				{/* <div dangerouslySetInnerHTML={{ __html: marked(markdown) }} /> */}
-				{/* or */}
-				{/* {marked(markdown)} */}
-
-				{/* user input display here */}
+				{/* display user input from editor textarea here  */}
+				{value}
 			</div>
 		</div>
 	);
