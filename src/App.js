@@ -8,8 +8,7 @@ import Footer from "./components/Footer";
 
 function App() {
 	return (
-		<div className="App">
-			<Header />
+		<div className="overflow-y-auto">
 			<Main />
 			<Footer />
 		</div>

@@ -7,7 +7,7 @@ import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
 	return (
-		<header className="w-full fixed top-0 text-right p-2">
+		<header className="w-full text-right p-2">
 			<ToggleDarkMode />
 		</header>
 	);

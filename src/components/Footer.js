@@ -1,6 +1,6 @@
 const Footer = () => {
 	return (
-		<footer className="w-full fixed bottom-0 text-center p-2">
+		<footer className="w-full text-center p-2">
 			<p>
 				made by <span> </span>
 				<a
