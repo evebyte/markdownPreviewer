@@ -15,14 +15,14 @@ const Editor = () => {
 
 	useEffect(() => {
 		const editorWindow = document.getElementById("editorWindow");
-		const previewerWindow = document.getElementById("previewerWindow");
+		const toolbar = document.getElementById("editorToolbar");
 
 		if (isFullscreen) {
 			editorWindow.classList.add("fullscreen");
-			previewerWindow.classList.add("hidden");
+			toolbar.classList.add("rounded-none");
 		} else {
 			editorWindow.classList.remove("fullscreen");
-			previewerWindow.classList.remove("hidden");
+			toolbar.classList.remove("rounded-none");
 		}
 	}, [isFullscreen]);
 
@@ -30,18 +30,14 @@ const Editor = () => {
 		setIsFullscreen(!isFullscreen);
 	};
 
-	// handle markdown change
-	const [value, setValue] = useState("");
-
-	const handleChange = (e) => {
-		setValue(e.target.value);
-	};
+	// handle textarea change
+	const handleChange = (e) => {};
 
 	return (
 		<div id="editorWindow" className="w-11/12 md:w-7/12 mx-auto">
 			{/* toolbar */}
 			<div
-				id="toolbar"
+				id="editorToolbar"
 				className="monospace font-bold
                     flex row  
                     bg-gradient-to-r from-sky-400 to-blue-500
@@ -79,7 +75,7 @@ const Editor = () => {
 			{/* editor */}
 			<textarea
 				id="editor"
-				value={value}
+				// value={}
 				onChange={handleChange}
 				type="text"
 				className="monospace

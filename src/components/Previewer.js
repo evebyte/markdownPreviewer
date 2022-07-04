@@ -12,20 +12,20 @@ import {
 	faMinimize,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Previewer = ({ markdown, onChange }) => {
+const Previewer = (props) => {
 	// fullscreen toggle
 	const [isFullscreen, setIsFullscreen] = useState(false);
 
 	useEffect(() => {
-		const editorWindow = document.getElementById("editorWindow");
 		const previewerWindow = document.getElementById("previewerWindow");
+		const toolbar = document.getElementById("previewToolbar");
 
 		if (isFullscreen) {
-			editorWindow.classList.add("hidden");
 			previewerWindow.classList.add("fullscreen");
+			toolbar.classList.add("rounded-none");
 		} else {
-			editorWindow.classList.remove("hidden");
 			previewerWindow.classList.remove("fullscreen");
+			toolbar.classList.remove("rounded-none");
 		}
 	}, [isFullscreen]);
 
@@ -33,19 +33,16 @@ const Previewer = ({ markdown, onChange }) => {
 		setIsFullscreen(!isFullscreen);
 	};
 
-	// handle markdown change
-	const [value, setValue] = useState("");
-
+	// handle textarea change
 	const handleChange = (e) => {
-		setValue(e.target.value);
-		onChange(e.target.value);
+		props.setValue(e.target.value);
 	};
 
 	return (
 		<div id="previewerWindow" className="w-11/12 md:w-8/12 mx-auto">
 			{/* toolbar */}
 			<div
-				id="toolbar"
+				id="previewToolbar"
 				className="monospace font-bold
                     flex row  
                     bg-gradient-to-r from-sky-400 to-blue-500
@@ -98,7 +95,7 @@ const Previewer = ({ markdown, onChange }) => {
                     "
 			>
 				{/* display user input from editor textarea here  */}
-				{value}
+				{props.value}
 			</div>
 		</div>
 	);
