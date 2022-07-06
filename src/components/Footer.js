@@ -9,7 +9,6 @@ const Footer = () => {
 					className="font-bold underline
 					text-sky-400 dark:text-sky-600  
 					hover:text-blue-500 dark:hover:text-blue-700
-                    hover:scale-110 active:scale-90
 					"
 					rel="noopener noreferrer"
 				>
