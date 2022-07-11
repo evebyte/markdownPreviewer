@@ -1,42 +1,66 @@
-// ! this is still a work in progress and may not be used at all
-
 import { useState, useEffect } from "react";
 
 // font awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMaximize, faMinimize } from "@fortawesome/free-solid-svg-icons";
+import {
+	faPenToSquare,
+	faMagnifyingGlass,
+	faMaximize,
+	faMinimize,
+	faSun,
+	faMoon,
+} from "@fortawesome/free-solid-svg-icons";
 
-const Toolbar = (name, icon) => {
-	// fullscreen toggle
-	const [isFullscreen, setIsFullscreen] = useState(false);
+const Toolbar = (id, icon, title, window) => {
+	// fullscreen toggle for editorWindow
+	const [isEditorFullscreen, setIsEditorFullscreen] = useState(false);
 
 	useEffect(() => {
-		// determine which window to hide/show
 		const editorWindow = document.getElementById("editorWindow");
-		const previewerWindow = document.getElementById("previewerWindow");
+		const toolbar = document.getElementById("editorToolbar");
 
-		if (isFullscreen) {
+		if (isEditorFullscreen) {
 			editorWindow.classList.add("fullscreen");
-			previewerWindow.classList.add("hidden");
+			toolbar.classList.add("rounded-none");
 		} else {
 			editorWindow.classList.remove("fullscreen");
-			previewerWindow.classList.remove("hidden");
+			toolbar.classList.remove("rounded-none");
 		}
-	}, [isFullscreen]);
+	}, [isEditorFullscreen]);
 
-	const handleFullscreen = () => {
-		setIsFullscreen(!isFullscreen);
+	const handleEditorFullscreen = () => {
+		setIsEditorFullscreen(!isEditorFullscreen);
+	};
+
+	// fullscreen toggle for previewerWindow
+	const [isPreviewerFullscreen, setIsPreviewerFullscreen] = useState(false);
+
+	useEffect(() => {
+		const previewerWindow = document.getElementById("previewerWindow");
+		const toolbar = document.getElementById("previewToolbar");
+
+		if (isPreviewerFullscreen) {
+			previewerWindow.classList.add("fullscreen");
+			toolbar.classList.add("rounded-none");
+		} else {
+			previewerWindow.classList.remove("fullscreen");
+			toolbar.classList.remove("rounded-none");
+		}
+	}, [isPreviewerFullscreen]);
+
+	const handlePreviewerFullscreen = () => {
+		setIsPreviewerFullscreen(!isPreviewerFullscreen);
 	};
 
 	return (
 		<div
-			id="toolbar"
+			id="editorToolbar"
 			className="monospace font-bold
                     flex row  
                     bg-gradient-to-r from-sky-400 to-blue-500
                     dark:from-sky-700 dark:to-blue-800
                     text-white dark:text-slate-200
-                    justify-between items-center
+                    justify-between 
                     p-2 
                     rounded-t-lg
                     "
@@ -44,15 +68,39 @@ const Toolbar = (name, icon) => {
 			{/* left side of toolbar  */}
 			<div className="flex flex-row">
 				<div className="inline-block align-middle mr-1">
-					<FontAwesomeIcon icon={icon} />
+					<FontAwesomeIcon icon={faPenToSquare} />
 				</div>
-				<p>{name}</p>
+				<p>Editor</p>
 			</div>
 
 			{/* right side of toolbar */}
+			{/* todo: add "exit fullscreen" when pressing escape key if isFullScreen is true */}
 			<div className="flex flex-row">
-				<button onClick={handleFullscreen} title="Toggle Fullscreen">
-					{isFullscreen ? (
+				{/* dark mode button */}
+				<button
+					title="Toggle Light/Dark Mode"
+					className="
+								mr-2 hover:scale-110 active:scale-90
+								"
+					onClick={handleMode}
+				>
+					{darkTheme ? (
+						<span>
+							<FontAwesomeIcon icon={faSun} />
+						</span>
+					) : (
+						<span>
+							<FontAwesomeIcon icon={faMoon} />
+						</span>
+					)}
+				</button>
+
+				<button
+					onClick={handleEditorFullscreen}
+					title="Toggle Fullscreen"
+					className="hover:scale-110 active:scale-90"
+				>
+					{isEditorFullscreen ? (
 						<span>
 							<FontAwesomeIcon icon={faMinimize} />
 						</span>

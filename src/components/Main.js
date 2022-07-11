@@ -96,7 +96,7 @@ const Main = () => {
                     bg-gradient-to-r from-sky-400 to-blue-500
                     dark:from-sky-700 dark:to-blue-800
                     text-white dark:text-slate-200
-                    justify-between items-center
+                    justify-between 
                     p-2 
                     rounded-t-lg
                     "
@@ -181,7 +181,7 @@ const Main = () => {
                     bg-gradient-to-r from-sky-400 to-blue-500
                     dark:from-sky-700 dark:to-blue-800
                     text-white dark:text-slate-200
-                    justify-between items-center
+                    justify-between 
                     p-2
                     rounded-t-lg
                     "
