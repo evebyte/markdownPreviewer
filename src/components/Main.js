@@ -1,6 +1,7 @@
 // react
 import { useState, useEffect } from "react";
 
+// todo: make components smaller and use the useContext hook instead of prop drilling
 // components
 // import Editor from "./Editor";
 // import Previewer from "./Previewer";
